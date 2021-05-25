@@ -2,10 +2,11 @@ import random
 
 class ABTrial:
     
-    def __init__(self, x_present, T1_position, T2_lag, config):
+    def __init__(self, x_present, T1_position, T2_lag, corr_detection, config):
         self.x_present = x_present
         self.T1_position = T1_position
         self.T2_lag = T2_lag
+        self.corr_detection = corr_detection
         self.config = config
         self.create_stream()
         

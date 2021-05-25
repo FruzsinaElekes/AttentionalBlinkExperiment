@@ -19,7 +19,8 @@ class ABExperiment:
             + [T1_2] * int(total/8) 
             + [T1_3] * int(total/8)) * 2
         T2_lags = self.config["vars"]["T2_lag"] * int(total / 8) + [None] * int(total / 2)
-        combined = list(zip(x_present, T1_positions, T2_lags))
+        corr_detection = [self.participant.yes_key if i == 1 else self.participant.no_key for i in x_present]
+        combined = list(zip(x_present, T1_positions, T2_lags, corr_detection))
         random.shuffle(combined)
         self.trial_list = [ ABTrial(*item, self.config) for item in combined ]
         
