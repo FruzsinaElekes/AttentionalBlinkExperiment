@@ -7,11 +7,10 @@ from Participant import Participant
 def run_experiment():
     config = yaml.safe_load(open("config.yaml"))
     presenter = Presenter(config)
-    participant = Participant(presenter.ask_for_participant_number(), config)
-    print(participant.yes_key)
-    print(participant.participant_number)
+    participant = Participant(presenter.ask_for_participant_number(), 
+        *config["vars"]["part_keys"])
 
-    exp = ABExperiment(config)
+    exp = ABExperiment(participant, presenter, config)
 
 if __name__ == "__main__":
     run_experiment()

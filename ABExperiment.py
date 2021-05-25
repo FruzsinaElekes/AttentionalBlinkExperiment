@@ -3,7 +3,9 @@ import random
 
 class ABExperiment:
     
-    def __init__(self, config):
+    def __init__(self, participant, presenter, config):
+        self.participant = participant
+        self.presenter = presenter
         self.config = config
         self.create_trial_list()
         
