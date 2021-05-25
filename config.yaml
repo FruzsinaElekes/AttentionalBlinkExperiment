@@ -1,6 +1,11 @@
 vars:
   exp_name: attantionalBlink
   total_trial_number: 240 # multiples of 32 work only
+  T1_pos:
+    - 3
+    - 4
+    - 5
+    - 6
   T2_lag: 
     - 1
     - 3
