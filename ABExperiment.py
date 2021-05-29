@@ -23,7 +23,7 @@ class ABExperiment:
         corr_detection = [self.participant.yes_key if i == 1 else self.participant.no_key for i in x_present]
         combined = list(zip(x_present, T1_positions, T2_lags, corr_detection))
         random.shuffle(combined)
-        return [ ABTrial(*item, self.config) for item in combined ]
+        return [ABTrial(i, *item, self.config) for i, item in enumerate(combined)]
         
     
     def run(self):
