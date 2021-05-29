@@ -91,12 +91,16 @@ class Presenter:
     def identification_task(self, trial): 
         self.present_text(self.config["inst"]["identification"])
         event.clearEvents()
-        trial.identification_ans = event.waitKeys(keyList = ['s', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'escape'])[0]
+        keys = list(map(str.lower, self.config["vars"]["targets"])) + ['escape']
+        trial.identification_ans = event.waitKeys(keyList = keys)[0]
         self.should_quit(trial.identification_ans)
     
     
-    def detection_task(self, trial): 
-        pass
+    def detection_task(self, trial, yes, no): 
+        self.present_text(self.config["inst"]["detection"].format(yes.upper(), no.upper()))
+        event.clearEvents()
+        trial.detection_ans = event.waitKeys(keyList = [yes, no, 'escape'])[0]
+        self.should_quit(trial.detection_ans)
         
     
     def blank(self): 

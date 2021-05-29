@@ -38,6 +38,6 @@ class ABExperiment:
 
             self.presenter.present_stimuli(trial)
             self.presenter.identification_task(trial)
-            self.presenter.detection_task(trial)
+            self.presenter.detection_task(trial, self.participant.yes_key, self.participant.no_key)
             self.presenter.blank()
             self.file_writer.write_trial(trial)
