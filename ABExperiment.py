@@ -3,9 +3,10 @@ import random
 
 class ABExperiment:
     
-    def __init__(self, participant, presenter, config):
+    def __init__(self, participant, presenter, file_writer, config):
         self.participant = participant
         self.presenter = presenter
+        self.file_writer = file_writer
         self.config = config
         self.trial_list = self.create_trial_list()
         
@@ -30,7 +31,8 @@ class ABExperiment:
         
         for t, trial in enumerate(self.trial_list): 
             if t == 0:
-                self.presenter.instruct_waitkey(self.config["inst"]["start_exp"])
+                start = self.config["inst"]["start_exp"].format(*self.config["vars"]["targets"])
+                self.presenter.instruct_waitkey(start)
             elif t == self.config["vars"]["total_trial_number"] / 2:
                 self.presenter.instruct_waittime_thenkey(self.config["inst"]["break"], 60)
 
