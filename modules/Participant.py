@@ -9,4 +9,6 @@ class Participant:
     
     def to_string(self): 
         return f"{self.participant_number},{self.yes_key},{self.no_key}"
-        
+    
+    def get_header(self):
+        return "part_no,yes_key,no_key"

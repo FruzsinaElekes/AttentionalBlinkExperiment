@@ -34,4 +34,8 @@ class ABTrial:
             self.detection_ans,
             self.corr_detection,
             "".join(self.stream))
-        
+    
+    
+    def get_header(self): 
+        return "trial_no,T1,T1_pos,x_present,T2_lag,ident_ans,det_ans,det_corr,stream"
+    
