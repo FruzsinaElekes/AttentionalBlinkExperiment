@@ -2,7 +2,8 @@ import random
 
 class ABTrial:
     
-    def __init__(self, x_present, T1_position, T2_lag, corr_detection, config):
+    def __init__(self, num, x_present, T1_position, T2_lag, corr_detection, config):
+        self.trial_number = num
         self.x_present = x_present
         self.T1_position = T1_position
         self.T2_lag = T2_lag
@@ -11,7 +12,6 @@ class ABTrial:
         self.identification_ans = None
         self.detection_ans = None
         self.stream = self.create_stream()
-        self.target = self.stream[self.T1_position]
         
     def create_stream(self):
         self.T1 = random.sample (self.config["vars"]["targets"], 1)[0]
@@ -21,3 +21,17 @@ class ABTrial:
         if self.x_present == 1:
             stream[self.T1_position + self.T2_lag] = "X"
         return stream
+        
+    
+    def to_string(self): 
+        return "{},{},{},{},{},{},{},{},{}".format(
+            self.trial_number,
+            self.T1,
+            self.T1_position,
+            self.x_present,
+            self.T2_lag,
+            self.identification_ans,
+            self.detection_ans,
+            self.corr_detection,
+            "".join(self.stream))
+        
