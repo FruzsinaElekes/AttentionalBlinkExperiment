@@ -31,8 +31,8 @@ vars:
     - 1
     - 1
   units: pix
-  wrapWidth: 1690
-  textHeight: 40
+  wrap_width: 1690
+  text_height: 40
   ITI: 4 
   fix: 11
   letter_time: 2
