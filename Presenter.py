@@ -23,7 +23,7 @@ class Presenter:
                         text = "")
             
         self.letter = visual.TextBox(window=self.myWin, 
-                         text="",
+                         text=".",
                          font_size=self.config["vars"]["stim_size"],
                          font_color=self.config["vars"]["text_color"], 
                          size=(200,200),
@@ -68,3 +68,37 @@ class Presenter:
         dlg = gui.DlgFromDict(dictionary = exp_info, title = 'AB')
         if dlg.OK == False:core.quit()
         return int(exp_info['participant_number'])
+        
+        
+    def present_stimuli(self, trial): 
+        for bl in range (0, self.config["vars"]["fix"]):
+            self.fix_cross.draw()
+            self.myWin.flip()
+        for z in range (0, len(trial.stream)):
+            self.letter.setText(trial.stream[z])
+            
+            if z == trial.T1_position:
+                self.letter.setFontColor(self.config["vars"]["target_color"])
+            else:
+                self.letter.setFontColor(self.config["vars"]["text_color"])
+            
+            for f in range (0, self.config["vars"]["letter_time"]):
+                self.letter.draw()
+                self.myWin.flip()
+            
+            for f in range (0, self.config["vars"]["ITI"]):
+                self.myWin.flip()
+    
+    def identification_task(self, trial): 
+        pass
+    
+    
+    def detection_task(self, trial): 
+        pass
+        
+    
+    def blank(self): 
+        for b in range (0,90):
+            self.myWin.flip()
+
+    

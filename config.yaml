@@ -36,7 +36,7 @@ vars:
   ITI: 4 
   fix: 11
   letter_time: 2
-  betu_meret: 60
+  stim_size: 60
   targets: 
     - S
     - D
