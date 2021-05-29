@@ -27,11 +27,17 @@ class Presenter:
         self.instructions.setText(text)
         self.instructions.draw()
         self.myWin.flip()
-        keys = []
-        #while len(keys) == 0:
         keys = event.waitKeys(keyList = ['space', 'escape'])
         if keys[0] == 'escape':
             core.quit()
+    
+    
+    def instruct_waittime_thenkey(self, text, secs):
+        self.instructions.setText(text)
+        self.instructions.draw()
+        self.myWin.flip()
+        core.wait(secs)
+        self.instruct_waitkey(self.config["inst"]["press_space"])
     
     
     def ask_for_participant_number(self):
