@@ -1,4 +1,4 @@
-from ABTrialClass import ABTrial
+from modules.ABTrialClass import ABTrial
 import random
 
 class ABExperiment:

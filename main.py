@@ -1,9 +1,9 @@
 import yaml
-from ABTrialClass import ABTrial 
-from ABExperiment import ABExperiment
-from Presenter import Presenter
-from Participant import Participant
-from FileWriter import FileWriter
+from modules.ABTrialClass import ABTrial 
+from modules.ABExperiment import ABExperiment
+from modules.Presenter import Presenter
+from modules.Participant import Participant
+from modules.FileWriter import FileWriter
 
 def main():
     config = yaml.safe_load(open("config.yaml"))
