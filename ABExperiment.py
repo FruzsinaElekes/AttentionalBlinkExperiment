@@ -33,8 +33,9 @@ class ABExperiment:
                 self.presenter.instruct_waitkey(self.config["inst"]["start_exp"])
             elif t == self.config["vars"]["total_trial_number"] / 2:
                 self.presenter.instruct_waittime_thenkey(self.config["inst"]["break"], 60)
-            
-            print(t)
-        
-        
-        
+
+            self.presenter.present_stimuli(trial)
+            self.presenter.identification_task(trial)
+            self.presenter.detection_task(trial)
+            self.presenter.blank()
+            self.file_writer.write_trial(trial)
