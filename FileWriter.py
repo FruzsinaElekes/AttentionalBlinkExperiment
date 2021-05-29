@@ -4,8 +4,9 @@ class FileWriter:
     
     def __init__(self):
         self.cwdir = os.getcwd()
-        if not os.path.exists(self.cwdir + '\data'):
-            os.makedirs(self.cwdir + '\data')
+        self.datadir = self.cwdir + '\data'
+        if not os.path.exists(self.datadir):
+            os.makedirs(self.datadir)
         
     
     def write_trial(self, trial): 
