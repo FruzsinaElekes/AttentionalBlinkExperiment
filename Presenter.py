@@ -46,9 +46,8 @@ class Presenter:
     
     def instruct_waitkey(self, text):
         self.present_text(text)
-        keys = event.waitKeys(keyList = ['space', 'escape'])
-        if keys[0] == 'escape':
-            core.quit()
+        key = event.waitKeys(keyList = ['space', 'escape'])[0]
+        self.should_quit(key)
     
     
     def instruct_waittime_thenkey(self, text, secs):
@@ -90,7 +89,10 @@ class Presenter:
                 self.myWin.flip()
     
     def identification_task(self, trial): 
-        pass
+        self.present_text(self.config["inst"]["identification"])
+        event.clearEvents()
+        trial.identification_ans = event.waitKeys(keyList = ['s', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'escape'])[0]
+        self.should_quit(trial.identification_ans)
     
     
     def detection_task(self, trial): 
@@ -101,4 +103,7 @@ class Presenter:
         for b in range (0,90):
             self.myWin.flip()
 
+    
+    def should_quit(self, key): 
+        if key == 'escape': core.quit()
     
