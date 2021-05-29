@@ -11,7 +11,7 @@ def main():
     participant = Participant(
         presenter.ask_for_participant_number(), 
         *config["vars"]["part_keys"])
-    file_writer = FileWriter()
+    file_writer = FileWriter(participant)
 
     exp = ABExperiment(participant, presenter, file_writer, config)
     exp.run()
