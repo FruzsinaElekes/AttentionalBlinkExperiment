@@ -1,6 +1,6 @@
 import random
 
-class ABTrial:
+class Trial:
     
     def __init__(self, num, x_present, T1_position, T2_lag, corr_detection, config):
         self.trial_number = num
@@ -12,6 +12,8 @@ class ABTrial:
         self.identification_ans = None
         self.detection_ans = None
         self.stream = self.create_stream()
+        self.det_accuracy = None
+        self.ident_accuracy = None
         
     def create_stream(self):
         self.T1 = random.sample (self.config["vars"]["targets"], 1)[0]
@@ -21,10 +23,14 @@ class ABTrial:
         if self.x_present == 1:
             stream[self.T1_position + self.T2_lag] = "X"
         return stream
-        
+    
+    
+    def calculate_accuracy(self):
+        self.det_accuracy = int(self.detection_ans == self.corr_detection)
+        self.ident_accuracy = int(self.identification_ans.upper() == self.T1)
     
     def to_string(self): 
-        return "{},{},{},{},{},{},{},{},{}".format(
+        return "{},{},{},{},{},{},{},{},{},{}".format(
             self.trial_number,
             self.T1,
             self.T1_position,
@@ -32,10 +38,11 @@ class ABTrial:
             self.T2_lag,
             self.identification_ans,
             self.detection_ans,
-            self.corr_detection,
-            "".join(self.stream))
+            "".join(self.stream),
+            self.ident_accuracy,
+            self.det_accuracy)
     
     
     def get_header(self): 
-        return "trial_no,T1,T1_pos,x_present,T2_lag,ident_ans,det_ans,det_corr,stream"
+        return "trial_no,T1_letter,T1_pos,T2_present,T2_lag,ident_ans,det_ans,stream,ident_accuracy,det_accuracy"
     

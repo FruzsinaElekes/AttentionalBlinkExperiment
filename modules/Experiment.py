@@ -1,7 +1,7 @@
-from modules.ABTrialClass import ABTrial
+from modules.Trial import Trial
 import random
 
-class ABExperiment:
+class Experiment:
     
     def __init__(self, participant, presenter, file_writer, config):
         self.participant = participant
@@ -23,21 +23,23 @@ class ABExperiment:
         corr_detection = [self.participant.yes_key if i == 1 else self.participant.no_key for i in x_present]
         combined = list(zip(x_present, T1_positions, T2_lags, corr_detection))
         random.shuffle(combined)
-        return [ABTrial(i, *item, self.config) for i, item in enumerate(combined)]
+        return [Trial(i, *item, self.config) for i, item in enumerate(combined)]
         
+    def instruct_if_needed(self, trial):
+        if trial.trial_number == 0:
+            start = self.config["inst"]["start_exp"].format(*self.config["vars"]["targets"])
+            self.presenter.instruct_waitkey(start)
+        elif trial.trial_number == self.config["vars"]["total_trial_number"] / 2:
+            self.presenter.instruct_waittime_thenkey(self.config["inst"]["break"], 60)
     
     def run(self):
         self.presenter.create_visual_objects()
-        
-        for t, trial in enumerate(self.trial_list): 
-            if t == 0:
-                start = self.config["inst"]["start_exp"].format(*self.config["vars"]["targets"])
-                self.presenter.instruct_waitkey(start)
-            elif t == self.config["vars"]["total_trial_number"] / 2:
-                self.presenter.instruct_waittime_thenkey(self.config["inst"]["break"], 60)
 
+        for trial in self.trial_list: 
+            self.instruct_if_needed(trial)
             self.presenter.present_stimuli(trial)
             self.presenter.identification_task(trial)
             self.presenter.detection_task(trial, self.participant.yes_key, self.participant.no_key)
             self.presenter.blank()
+            trial.calculate_accuracy()
             self.file_writer.write_trial(trial)
